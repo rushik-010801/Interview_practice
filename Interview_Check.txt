@@ -1,0 +1,41 @@
+System Design, HM and Behavioural Interview Prep 
+
+Practice Question on Parallel Processing using Streams API, Futures and Executor Services
+
+Low-Level-Design
+	-> Try practising LLD questions questions taken from chatgpt and other online previous questions
+	-> SOLID Principle Revision try applying it on your basic LLD Examples
+	-> Design Pattern 
+		-> Focus on (Decorator, command , Builder, factory)
+		-> Try Implementing in few examples
+	-> Checkout your practiced examples, improvements that can be made
+
+System Design Question 
+	-> Youtube, Netflix and Instagram 
+	-> General HLD Terms like (Load Balancer, Zoo keeper, choosing DataBase)
+	-> Notes till now you have written
+	-> ZAS Architecture (why we have chosen Each and every Technology and how it is better than the other alternatives)
+
+Basic Brush up on 
+	-> Java - Multithreading, Memory Management and etc
+	-> CI/CD (Elastic Search)
+	-> Kubernetes
+	-> JIB and Docker
+	-> Vert.x Framework
+	-> Spring Framework
+	-> Kafka and related Questions (also difference with AWS Kinesis)
+	-> Dynamo DB and scylla
+	-> SAFe Agile Methodology
+	-> Testing techniques
+
+Resume based and Behavioural Type
+	-> What are you contributions in the project.
+	-> What are your day-to-day activities
+	-> how you guys resolved Merge conflicts
+	-> How to handle conflicts between the colleagues\
+	-> TPS of all your services
+	-> Recent feature that you have worked on -> optimising of zas-frequency-capping service
+
+Interview Questions That you have accumulated till now
+Check out the Job description and Company Profile once again
+Your introduction in reverse order

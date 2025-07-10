@@ -1,0 +1,20 @@
+Here, you are given a real world design problem where you have provide solution
+using Object Oriented Programming.
+
+To answer low level design, we need to first clarify few question:
+- Clarify Requirements and core use-cases
+- Identify Entities
+- Based on the core usecases of the business, you should identity core methods
+- Translate entities into classes
+- Define relationship between classes, sometimes you need to draw UML diagrams in interviews
+- Implement important methods
+- Exception handling - Handling errors, exceptions, edge cases and unexpected input
+
+Best practices for solving low level design:
+- Use meaningful names
+- Focus on simplicity and readability
+- favour composition over inheritance (to provide flexibility over tight coupling)
+- user interfaces
+- strive for modularity
+- apply design patterns and principles
+- make your code scalable

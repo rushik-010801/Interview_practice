@@ -1,0 +1,749 @@
+JAVA
+    
+    String intern() >
+
+                    The String.intern() method is used to add a string to the pool of interned strings and returns a reference to the interned string. The string pool, also known as the intern pool, is a special area of memory where Java stores unique string literals to conserve memory and enhance performance.
+
+    Lambda >
+
+                    Lambdas in Java, introduced in Java 8, are a feature that allows developers to write more concise and readable code, particularly when dealing with instances where behavior needs to be passed around, such as with functional programming. Lambdas facilitate the creation of anonymous methods and can be seen as a shorthand for implementing functional interfaces.
+    
+    Streams >
+                    Java 8 introduced the Streams API, which provides a powerful and concise way to process collections of objects. Java streams are not data structures themselves, but rather a mechanism for processing collections of data in a functional style, enabling developers to express complex data processing operations more succinctly and effectively. Provides following functionalities
+
+                    - Filtering: Streams make it easy to filter elements based on specific criteria using the filter() method.
+
+                    - Mapping: 
+                        - map() method for transforming each element of a stream into another form.
+
+                        - flatMap() is particularly useful for flattening nested collections, as it allows you to work with the inner elements directly.
+
+                    - Sorting: sorted() method for sorting elements based on natural order or a custom comparator.
+                    
+                    - Grouping and Partitioning: Streams support grouping elements based on a property or partitioning elements into two groups based on a predicate using Collectors.groupingBy() and Collectors.partitioningBy().
+                    
+                    - Aggregation and Reduction: sum(), average(), min(), max(), and count().
+                    
+                    - Parallel Processing: Streams can be parallelized using the parallel() method to take advantage of multi-core processors for improved performance. Uses common ForkJoinPool, the common ForkJoinPool is a static instance shared by all parallel streams in the JVM.
+
+
+    Fork Join Pool >
+
+                    ForkJoinPool employs a work-stealing algorithm to maximize CPU utilization and minimize idle time among worker threads. Each worker thread has its own dequeue (double-ended queue) of tasks. When a worker thread exhausts its own tasks, it can steal tasks from the tail of another worker thread's dequeue. ForkJoinPool is well-suited for parallel execution of divide-and-conquer algorithms, where a large task is recursively split into smaller subtasks that can be executed in parallel.
+
+    Metaspace vs Permgen >
+
+                    PermGen, short for Permanent Generation, is a fixed-size memory area that was used in older versions of Java (up to Java 7) to store metadata related to classes, such as class definitions, method information, and static variables. PermGen is part of the non-heap memory space. It's a contiguous area of memory that is allocated when the JVM starts and remains fixed in size throughout the lifetime of the JVM.
+
+                    Metaspace is a memory space introduced in Java 8 to replace PermGen. It's also known as the "class metadata space." Metaspace is not fixed in size and can dynamically expand and contract based on the application's requirements and available system resources. Unlike PermGen, Metaspace is not located in the Java heap but is allocated from native memory managed by the operating system.
+    
+
+    Garbage Collection >
+                    
+                    Garbage collection (GC) is a fundamental feature of managed programming languages aimed at automatically reclaiming memory occupied by objects that are no longer needed by the application.
+
+                    Mark and Sweep: The most basic form of garbage collection involves a mark-and-sweep algorithm. In the mark phase, the garbage collector traverses all reachable objects starting from a set of root objects (e.g., global variables, thread stacks) and marks them as live. In the sweep phase, the garbage collector identifies and frees memory occupied by objects that were not marked as live during the mark phase.
+
+                    Generational garbage collection (GC) is a memory management strategy used by many modern garbage collectors, including those in Java, .NET, and other managed programming languages. It divides the heap memory into multiple generations or age groups based on the lifetime of objects. The key idea behind generational garbage collection is that most objects have a short lifespan, and only a small percentage of objects survive for a longer time. By leveraging this observation, generational GC aims to improve garbage collection efficiency and reduce pause times by focusing garbage collection efforts on the most recently allocated objects.
+
+                    - The heap is typically divided into two or more generations: the young generation (eden space) and the old generation (tenured space). The young generation is where new objects are allocated. It's relatively small and designed to hold short-lived objects.
+
+                    - Within the young generation, there are one or more survivor spaces (usually two). After garbage collection, surviving objects from the young generation are moved to one of the survivor spaces.
+
+                    - Objects that survive multiple garbage collection cycles in the young generation are promoted to the old generation.
+
+                    Generational GC can significantly reduce pause times by limiting garbage collection to the young generation, where most objects are short-lived.
+
+                    Types of GC in JAVA
+
+                    - Serial GC: The serial collector uses a single thread to perform all garbage collection work, which makes it relatively efficient because there is no communication overhead between threads.
+
+                    - Parallel GC: The parallel collector (also referred to here as the throughput collector) is a generational collector similar to the serial collector. The primary difference between the serial and parallel collectors is that the parallel collector has multiple threads that are used to speed up garbage collection.
+
+                    - G1 GC: G1 aims to provide the best balance between latency and throughput. G1 performs parts of its work at the same time as the application runs. It trades processor resources which would otherwise be available to the application for shorter collection pauses.
+
+                    Parallel GC can compact and reclaim space in the old generation only as a whole. G1 incrementally distributes this work across multiple much shorter collections. This substantially shortens pause time at the potential expense of throughput.
+
+                    - Z GC: The Z Garbage Collector (ZGC) is a scalable low latency garbage collector. ZGC performs all expensive work concurrently, without stopping the execution of application threads for more than a few milliseconds. It is suitable for applications which require low latency. Pause times are independent of heap size that is being used. ZGC supports heap sizes from 8MB to 16TB.
+
+                    In JDK 8 Parallel was the default, but this was changed to G1 in JDK 9. Since then G1 has improved at a higher rate than Parallel, but there are still use-cases where Parallel is the best choice. With the introduction of ZGC (production ready since JDK 15) there is also a third high performing alternative to put into the equation.
+
+                    - If you have absolutely no interest in GC pause times, then use the serial collector (if you only have one core) or the parallel collector (if you have more than one core).
+                    - If you need low pause times (with high probability), then use the G1 collector.
+                    - If you need ultra-low pause times, and/or you have an extremely large heap, use the Z collector(Z-collector also uses significantly more cpu.
+
+
+SOLID PRINCIPLES 
+
+                    SOLID principles are a set of design guidelines in object-oriented programming that help developers create more maintainable, understandable, and flexible software. The acronym SOLID stands for:
+
+                    Single Responsibility Principle (SRP): A class should have only one reason to change, meaning it should have only one job or responsibility. This makes the class easier to understand, test, and maintain.
+
+                    Open/Closed Principle (OCP): Software entities (like classes, modules, and functions) should be open for extension but closed for modification. This means that the behavior of a module can be extended without modifying its source code, typically achieved through abstraction and polymorphism.
+
+                    Liskov Substitution Principle (LSP): Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program. This principle ensures that a subclass can stand in for a superclass without causing errors or unexpected behavior.
+
+                    Interface Segregation Principle (ISP): Clients should not be forced to depend on interfaces they do not use. This principle encourages creating smaller, more specific interfaces rather than large, general-purpose ones, leading to more modular and decoupled code.
+
+                    Dependency Inversion Principle (DIP): High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g., interfaces). Additionally, abstractions should not depend on details. Details (concrete implementations) should depend on abstractions. This principle aims to reduce the coupling between different parts of a codebase.
+
+COLLECTIONS
+
+                    - Map Key to Value?
+                    Yes: Use a Map.
+                    
+                    HashMap (Unordered)
+                    LinkedHashMap (Insertion order)
+                    TreeMap (Sorted)
+
+                    - No Duplicate Entries?
+                    Yes: Use a Set.
+                    
+                    HashSet (Unordered)
+                    LinkedHashSet (Insertion order)
+                    TreeSet (Sorted)
+
+                    - Allow Duplicates?
+                    Yes: Use a List.
+                    
+                    LinkedList (Frequent insert/remove, start/end access)
+                    ArrayList (Index access, less insert/remove) Uses contiguous memory, generally more memory efficient, it's more cache friendly than LinkedList.,
+MULTITHREADING
+                
+    Process >
+
+                    Processes are often seen as synonymous with programs or applications. However, what the user sees as a single application may in fact be a set of cooperating processes. To facilitate communication between processes, most operating systems support Inter Process Communication (IPC) resources, such as pipes and sockets. IPC is used not just for communication between processes on the same system, but processes on different systems.
+
+                    Most implementations of the Java virtual machine run as a single process. A Java application can create additional processes using a ProcessBuilder object.
+
+    Thread >
+
+                    Threads are sometimes called lightweight processes. Both processes and threads provide an execution environment, but creating a new thread requires fewer resources than creating a new process.
+
+                    Threads exist within a process — every process has at least one. Threads share the process's resources, including memory and open files. This makes for efficient, but potentially problematic, communication.
+
+                    Multithreaded execution is an essential feature of the Java platform. Every application has at least one thread — or several, if you count "system" threads that do things like memory management and signal handling. But from the application programmer's point of view, you start with just one thread, called the main thread.
+
+    Concurrency >
+
+                    Concurrency is when two or more tasks can start, run, and complete in overlapping time periods. It doesn't necessarily mean they'll ever both be running at the same instant. For example, multitasking on a single-core machine.
+
+    Parallelism >
+
+                    Parallelism is when tasks literally run at the same time, e.g., on a multicore processor.
+
+    Synchronus/Asynchronous >
+
+                    When you execute something synchronously, you wait for it to finish before moving on to another task. When you execute something asynchronously, you can move on to another task before it finishes.
+
+    Thread Lifecycle >
+
+                    - NEW: a newly created thread that has not yet started the execution
+                    - RUNNABLE:  either running or ready for execution but it’s waiting for resource allocation
+                    - BLOCKED:  waiting to acquire a monitor lock to enter or re-enter a synchronized block/method
+                    - WAITING:  waiting for some other thread to perform a particular action without any time limit
+                    - TIMED_WAITING:  waiting for some other thread to perform a specific action for a specified period
+                    - TERMINATED: has completed its execution
+
+
+    Is creating a thread expensive? >
+
+                    Java thread creation is expensive because there is a fair bit of work involved:
+
+                    - A large block of memory has to be allocated and initialized for the thread stack.
+                    - System calls need to be made to create / register the native thread with the host OS.
+                    - Descriptors need to be created, initialized and added to JVM-internal data structures.
+
+    Daemon Thread >
+
+                    A daemon thread is a thread that does not prevent the JVM from exiting when the program finishes but the thread is still running. An example for a daemon thread is the garbage collection.
+
+                    You can use the setDaemon(boolean) method to change the Thread daemon properties before the thread starts.
+
+    Thread Contention >
+
+                    Locks are not the only resources on which contention can be experienced. Contention is simply when two threads try to access either the same resource or related resources in such a way that at least one of the contending threads runs more slowly than it would if the other thread(s) were not running.
+
+                    The most obvious example of contention is on a lock. If thread A has a lock and thread B wants to acquire that same lock, thread B will have to wait until thread A releases the lock.
+
+                    Now, this is platform-specific, but the thread may experience slowdowns even if it never has to wait for the other thread to release the lock! This is because a lock protects some kind of data, and the data itself will often be contended as well.
+
+                    For example, consider a thread that acquires a lock, modifies an object, then releases the lock and does some other things. If two threads are doing this, even if they never fight for the lock, the threads may run much slower than they would if only one thread was running.
+
+                    Why? Say each thread is running on its own core on a modern x86 CPU and the cores don't share an L2 cache. With just one thread, the object may remain in the L2 cache most of the time. With both threads running, each time one thread modifies the object, the other thread will find the data is not in its L2 cache because the other CPU invalidated the cache line. On a Pentium D, for example, this will cause the code to run at FSB speed, which is much less than L2 cache speed.
+
+                    Since contention can occur even if the lock doesn't itself get contended for, contention can also occur when there is no lock. For example, say your CPU supports an atomic increment of a 32-bit variable. If one thread keeps incrementing and decrementing a variable, the variable will be hot in the cache much of the time. If two threads do it, their caches will contend for ownership of the memory holding that variable, and many accesses will be slower as the cache coherency protocol operates to secure each core ownership of the cache line.
+
+                    Ironically, locks typically reduce contention. Why? Because without a lock, two threads could operate on the same object or collection and cause lots of contention (for example, there are lock free queues). Locks will tend to deschedule contending threads, allowing non-contending threads to run instead. If thread A holds a lock and thread B wants that same lock, the implementation can run thread C instead. If thread C doesn't need that lock, then future contention between threads A and B can be avoided for awhile. (Of course, this assumes there are other threads that could run. It won't help if the only way the system as a whole can make useful progress is by running threads that contend.)
+
+    Context Switching > 
+
+                    In computing, a context switch is the process of storing the state of a process or thread, so that it can be restored and resume execution at a later point, and then restoring a different, previously saved, state.[1] This allows multiple processes to share a single central processing unit (CPU), and is an essential feature of a multiprogramming or multitasking operating system. In a traditional CPU, each process - a program in execution - utilizes the various CPU registers to store data and hold the current state of the running process. However, in a multitasking operating system, the operating system switches between processes or threads to allow the execution of multiple processes simultaneously. For every switch, the operating system must save the state of the currently running process, followed by loading the next process state, which will run on the CPU. This sequence of operations that stores the state of the running process and the loading of the following running process is called a context switch.
+
+                    https://stackoverflow.com/questions/7439608/steps-in-context-switching/7443719
+
+    Race Condition >
+
+                    A race condition occurs in concurrent systems when the outcome of a process depends on the timing or sequence of other uncontrollable events. In other words, it's a scenario where the behavior of a system depends on the relative timing of events, often leading to unpredictable results. For example, in multithreading, if two threads are accessing and modifying shared data without proper synchronization, the final outcome may vary based on which thread executes its operation first.
+
+
+    Deadlock >
+
+                    Deadlock is a situation in which two or more competing actions are each waiting for the other to finish, preventing any of them from ever completing. In other words, each process is waiting for a resource that's held by another process in the set, resulting in a standstill. Deadlocks are common in concurrent systems with multiple resources and processes, such as databases or operating systems.
+
+    Starvation >
+
+                    Starvation occurs when a process is perpetually denied access to a resource it needs to proceed or complete its task because other processes are always given preference. Essentially, the starved process is constantly deprioritized or overlooked in favor of other processes, leading to its inability to progress despite being active.
+
+
+    Livelock > 
+
+                    Livelock is a situation where two or more processes continuously change their states in response to each other's actions without making any progress. Unlike deadlock, where processes are stuck, in a livelock, processes are not stuck but are caught in a loop of actions that prevents them from achieving their goals. It's a scenario similar to deadlock but with active processes that are unable to proceed.
+
+    volatile keyword >
+
+                    A variable declared with volatile keyword, has two main qualities which make it special.
+
+                    If we have a volatile variable, it cannot be cached into the computer's(microprocessor) cache memory by any thread. Access always happened from main memory.
+
+                    If there is a write operation going on a volatile variable, and suddenly a read operation is requested, it is guaranteed that the write operation will be finished prior to the read operation.
+
+
+    Non-Atomic Treatment of double and long >
+
+                    For the purposes of the Java programming language memory model, a single write to a non-volatile long or double value is treated as two separate writes: one to each 32-bit half. This can result in a situation where a thread sees the first 32 bits of a 64-bit value from one write, and the second 32 bits from another write.
+
+                    Writes and reads of volatile long and double values are always atomic.
+
+                    Writes to and reads of references are always atomic, regardless of whether they are implemented as 32-bit or 64-bit values. 
+
+    final Field Semantics >
+
+                    final fields also allow to implement thread-safe immutable objects without synchronization. A thread-safe immutable object is seen as immutable by all threads, even if a data race is used to pass references to the immutable object between threads.
+        
+
+    ArrayBlockingQueue >
+
+                A bounded blocking queue backed by an array. This queue orders elements FIFO (first-in-first-out). The head of the queue is that element that has been on the queue the longest time. The tail of the queue is that element that has been on the queue the shortest time. New elements are inserted at the tail of the queue, and the queue retrieval operations obtain elements at the head of the queue.
+                This is a classic "bounded buffer", in which a fixed-sized array holds elements inserted by producers and extracted by consumers. Once created, the capacity cannot be changed. Attempts to put an element into a full queue will result in the operation blocking; attempts to take an element from an empty queue will similarly block.
+
+                This class supports an optional fairness policy for ordering waiting producer and consumer threads. By default, this ordering is not guaranteed. However, a queue constructed with fairness set to true grants threads access in FIFO order. Fairness generally decreases throughput but reduces variability and avoids starvation.
+
+    LinkedBlockingQueue >
+
+                An optionally-bounded blocking queue based on linked nodes. This queue orders elements FIFO (first-in-first-out). The head of the queue is that element that has been on the queue the longest time. The tail of the queue is that element that has been on the queue the shortest time. New elements are inserted at the tail of the queue, and the queue retrieval operations obtain elements at the head of the queue. Linked queues typically have higher throughput than array-based queues but less predictable performance in most concurrent applications.
+                The optional capacity bound constructor argument serves as a way to prevent excessive queue expansion. The capacity, if unspecified, is equal to Integer.MAX_VALUE. Linked nodes are dynamically created upon each insertion unless this would bring the queue above capacity.
+
+    SynchronousQueue >
+
+                A blocking queue in which each insert operation must wait for a corresponding remove operation by another thread, and vice versa. A synchronous queue does not have any internal capacity, not even a capacity of one. You cannot peek at a synchronous queue because an element is only present when you try to remove it; you cannot insert an element (using any method) unless another thread is trying to remove it; you cannot iterate as there is nothing to iterate. The head of the queue is the element that the first queued inserting thread is trying to add to the queue; if there is no such queued thread then no element is available for removal and poll() will return null. For purposes of other Collection methods (for example contains), a SynchronousQueue acts as an empty collection. This queue does not permit null elements.
+                Synchronous queues are similar to rendezvous channels used in CSP and Ada. They are well suited for handoff designs, in which an object running in one thread must sync up with an object running in another thread in order to hand it some information, event, or task.
+
+    HashTable > 
+
+                Hashtable’s offer concurrent access to their entries, with a small caveat, the entire map is locked to perform any sort of operation. While this overhead is ignorable in a web application under normal load, under heavy load it can lead to delayed response times and overtaxing of your server for no good reason.
+
+    ConcurrentHashMap >
+
+                In Java 7, `ConcurrentHashMap` was implemented using a technique called segment locking. The map is divided into a fixed number of segments, each of which is essentially a separate hash table with its own lock. Each segment can be locked independently, allowing multiple threads to work on different segments concurrently without interfering with each other.
+
+                In Java 8, `ConcurrentHashMap` underwent a significant redesign to improve performance and scalability. The segment-based locking mechanism was replaced with a more fine-grained, lock-free approach using Compare-And-Swap (CAS) operations.
+
+                The hash table consists of an array of `Node` objects. When the number of nodes in a bin exceeds a certain threshold, the bin is transformed into a balanced tree (`TreeBin`) for faster lookups.
+                Instead of locking entire segments, `ConcurrentHashMap` uses CAS operations to update individual nodes. This minimizes the contention and allows higher concurrency. In some cases, such as resizing the table or modifying a `TreeBin`, synchronized blocks are used for thread safety.
+
+                The iterators provided byConcurrentHashMap are fail-safe, meaning they do not throw ConcurrentModificationException if the map is modified during iteration.
+
+    CopyOnWriteArrayList >
+
+                A thread-safe variant of ArrayList in which all mutative operations (add, set, and so on) are implemented by making a fresh copy of the underlying array.
+                
+                This is ordinarily too costly, but may be more efficient than alternatives when traversal operations vastly outnumber mutations, and is useful when you cannot or don't want to synchronize traversals, yet need to preclude interference among concurrent threads. The "snapshot" style iterator method uses a reference to the state of the array at the point that the iterator was created. This array never changes during the lifetime of the iterator, so interference is impossible and the iterator is guaranteed not to throw ConcurrentModificationException. The iterator will not reflect additions, removals, or changes to the list since the iterator was created. Element-changing operations on iterators themselves (remove, set, and add) are not supported. These methods throw UnsupportedOperationException.
+
+                The array update is an atomic operation and hence reads will always see the array in a consistent state. The advantage of only taking out a lock for write operations is improved throughput for reads: This is because write operations for a CopyOnWriteArrayList can potentially be very slow as they involve copying the entire list.
+
+                The underlying array reference is marked as volatile. An important detail is that volatile only applies to the array reference itself, not to the content of the array.
+
+    Striped Lock >
+                
+                When you want to associate a lock with an object, the key guarantee you need is that if key1.equals(key2), then the lock associated with key1 is the same as the lock associated with key2.
+
+                The crudest way to do this is to associate every key with the same lock, which results in the coarsest synchronization possible. On the other hand, you can associate every distinct key with a different lock, but this requires linear memory consumption and concurrency management for the system of locks itself, as new keys are discovered.
+
+                Striped allows the programmer to select a number of locks, which are distributed between keys based on their hash code. This allows the programmer to dynamically select a tradeoff between concurrency and memory consumption, while retaining the key invariant that if key1.equals(key2), then striped.get(key1) == striped.get(key2).
+
+    Semaphore > 
+
+                A counting semaphore. Conceptually, a semaphore maintains a set of permits. Each acquire() blocks if necessary until a permit is available, and then takes it. Each release() adds a permit, potentially releasing a blocking acquirer. However, no actual permit objects are used; the Semaphore just keeps a count of the number available and acts accordingly.
+
+                Semaphores are often used to restrict the number of threads than can access some (physical or logical) resource.
+
+    Cyclic Barrier >
+
+                A synchronization aid that allows a set of threads to all wait for each other to reach a common barrier point. CyclicBarriers are useful in programs involving a fixed sized party of threads that must occasionally wait for each other. The barrier is called cyclic because it can be re-used after the waiting threads are released.,SPRING
+
+    spring boot advantages >
+
+                    Auto-configuration: Spring Boot automatically configures your application based on the dependencies you have added to the project, eliminating much of the boilerplate configuration code.
+
+                    Starter Templates: It provides a set of starter POMs to simplify the build configuration, allowing you to easily add various libraries and dependencies to your project.
+
+                    Embedded Servers: Spring Boot applications come with embedded servers such as Tomcat, Jetty, and Undertow, enabling you to run your applications without needing an external web server.
+
+                    Monitoring and Metrics: Spring Boot includes production-ready features like health checks, metrics, and application insights via Actuator.
+
+                    Externalized Configuration: It supports externalized configuration, allowing you to manage different configurations for different environments easily.
+
+                    Robust Ecosystem: provides a comprehensive ecosystem for building robust applications.
+
+    spring boot 2 vs 3 >
+
+                    Spring Boot 3 provides improved and official support for GraalVM native images, providing better startup times and reduced memory consumption
+
+                    Spring Boot 2 is based on the javax.* namespace, Spring Boot 3 has migrated to the jakarta.* namespace (Jakarta EE 9+).
+
+                    Spring Boot 3 has improved integration with OpenTelemetry and Micrometer for better metrics, tracing, and logging.
+
+                    Spring Boot 3 introduces support for virtual threads, taking advantage of the advancements in Project Loom. 
+
+                    Spring Boot 3 incorporates Spring Security 6, which includes more modern security practices, better OAuth2 support, and enhanced security configurations.
+    
+    IOC Container, DI >
+
+                    Inversion of Control (IoC) is a principle in software design in which the control flow of a program is inverted compared to traditional procedural programming. In the context of Spring, IoC refers to the container managing the creation, configuration, and lifecycle of objects, and injecting dependencies where needed.
+
+                    Dependency Injection is a design pattern used to implement IoC, allowing dependencies to be injected into objects rather than objects instantiating their own dependencies. There are three main types of DI in Spring
+
+                    - Constructor Injection: Dependencies are provided through a class constructor.
+                    
+                    - Setter Injection: Dependencies are provided through setter methods.
+                    
+                    - Field Injection: Dependencies are directly injected into fields. (Note: While field injection is supported, constructor or setter injection is generally recommended for better testability and design clarity.)
+    
+    Bean Lifecycle >
+
+                    1) Beans definations are declared.
+
+                    2) Bean definations are loaded (BeanDefination Parser/Reader)
+
+                    3) Bean definations are processed (BeanFactoryPostProcessor): to modify bean definations before actual bean creation.
+
+                    4) Beans are instantiated (BeanFactory): invokes the constructor of each bean, if needed delates to custom FactoryBean instances.
+
+                    5) Dependencies are injected(setters are called): for constructor injection, dependent beans are created first followed by those that depend on them. Avoid cyclic dependencies.
+
+                    6) Beans are post processed (Round 1) (BeanPostProcessor#postProcessBeforeInitialization): called before the init-method.
+
+                    7) Beans are initialized, 
+                        - @PostConstruct, 
+                        - implements InitializingBean#afterPropertiesSet
+                        - @Bean(initMethod = "customInit")
+
+                    8) Beans are post processed (Round 2) (BeanPostProcessor#postProcessAfterInitialization): needed if you need to wrap a proxy around the bean, or in case of circular dependencies.
+
+                    9) Fully created bean is stored in the application context and is accessible.
+
+                    10) Beans are destroyed: 
+                        - @PreDestroy
+                        - implements DisposableBean#destroy
+                        - @Bean(destroyMethod = "customDestroy")
+
+
+    Bean Scopes >
+
+                    - singleton: (Default) Scopes a single bean definition to a single object instance for each Spring IoC container.
+
+                    - prototype: Scopes a single bean definition to any number of object instances.
+
+                    - request: Scopes a single bean definition to the lifecycle of a single HTTP request. That is, each HTTP request has its own instance of a bean created off the back of a single bean definition. Only valid in the context of a web-aware Spring ApplicationContext.
+
+                    - session: Scopes a single bean definition to the lifecycle of an HTTP Session. Only valid in the context of a web-aware Spring ApplicationContext.
+
+                    - application: Scopes a single bean definition to the lifecycle of a ServletContext. Only valid in the context of a web-aware Spring ApplicationContext.
+
+                    - websocket: Scopes a single bean definition to the lifecycle of a WebSocket. Only valid in the context of a web-aware Spring ApplicationContext.
+    
+    @Autowire >
+                    org.springframework.beans.factory.annotation, Primarily used for Spring's dependency injection.
+
+    @Inject >
+                    javax.inject (part of Java's standard dependency injection, JSR-330)
+
+    @Resource
+
+                    javax.annotation (part of Java EE, JSR-250)
+
+    @Lazy >
+                    When applied to a bean definition, the bean is only created and initialized when it is first requested from the Spring context.
+    
+    @Transaction >
+
+                    JTA transaction, very cumbersome to use, required JNDI. @Transaction provides abstraction over it, better exception handling(rollback), simplicity, declarative code, extensive support.
+
+    Spring WebFlux >
+
+                    Spring WebFlux is a part of the Spring Framework that provides support for building reactive web applications. It is designed to handle asynchronous, non-blocking, and event-driven applications, leveraging the reactive programming model. WebFlux is built on top of the Project Reactor, a reactive library implementing the Reactive Streams specification.
+
+                    - Mono: represents a single async value
+                    - Flux: represents a stream of async values. 
+
+
+
+HIBERNATE
+
+    Automatic Dirty Checking >
+
+                    Dirty Checking is a mechanism used by Hibernate to determine whether any value of an entity has changed since it was retrieved from the database. This helps Hibernate optimize database queries so that only the fields that have changed are updated.
+    
+    (getReference, getOne), (find, findById) >
+
+                    Eager Fetching: The find method immediately retrieves the entity from the database. It returns a fully initialized entity instance.
+
+                    Lazy Fetching: The getReference method returns a proxy to the entity. The actual data is not fetched until you access a property of the entity. This is also known as lazy loading.
+
+                        Post post = em.find(Post.class, postId);
+                        post.setAuthor(em.getReference(User.class, authorId)); 
+                        em.persist(post);
+
+                    hibernate.jpa.compliance.proxy (e.g. true or false)
+
+                    The JPA spec says that a javax.persistence.EntityNotFoundException should be thrown when accessing an entity Proxy which does not have an associated table row in the database.
+
+                    Traditionally, Hibernate does not initialize an entity proxy when accessing its identifier since we already know the identifier value, hence we can save a database roundtrip.
+
+                    If enabled Hibernate will initialize the entity proxy even when accessing its identifier.
+
+    persist, merge, save >
+
+                    persist: To make a transient (new) entity persistent (managed) and insert it into the database.
+
+                    merge: Reattaches a detached entity by merging its state into a new managed instance and returns this managed instance.
+
+                    save: not JPA, persist or merge depending on whether primary key is provided or not.
+
+    FetchType.LAZY but need EAGER? >
+
+                    - Using JPQL or HQL or Criteria API or custom queries (@Query) with JOIN FETCH
+                    - Using Entity Graphs
+
+                        EntityGraph<Parent> graph = entityManager.createEntityGraph(Parent.class);
+                        graph.addAttributeNodes("children");
+                        Map<String, Object> properties = new HashMap<>();
+                        properties.put("javax.persistence.fetchgraph", graph);
+                        Parent parent = entityManager.find(Parent.class, parentId, properties);
+
+                    - Hibernate Specific: initialize method
+
+                    - Named Entity Graphs
+
+                        @NamedEntityGraph(name = "Parent.children", attributeNodes = @NamedAttributeNode("children"))
+
+                        EntityGraph<?> entityGraph = entityManager.getEntityGraph("Parent.children");
+                        Parent parent = entityManager.createQuery("SELECT p FROM Parent p WHERE p.id = :id", Parent.class).setParameter("id", parentId).setHint("javax.persistence.fetchgraph", entityGraph).getSingleResult();
+
+                    - Hibernate Specific: initialize method (this will fire two queries instead of one)
+
+                        Parent parent = entityManager.find(Parent.class, parentId); // regular select query
+                        Hibernate.initialize(parent.getChildren()); // loads children by firing another query.
+
+
+
+    Caching >
+                    First-Level Cache (Session Cache): The first-level cache is associated with the Session (or EntityManager in JPA). Each session has its own first-level cache. It is enabled by default and cannot be turned off.
+
+                    Second-Level Cache (Shared Cache): The second-level cache is shared across sessions and is associated with the SessionFactory (or EntityManagerFactory in JPA). It stores entities and collections. It is not enabled by default and must be configured. 
+
+                    Query Cache: The query cache stores the results of HQL (Hibernate Query Language) or Criteria queries. Its main goal is to cache the results of queries to avoid repeated database queries for the same result set.
+
+                    The second-level cache is ideal for scenarios where you frequently access individual entities by their primary keys. The query cache is useful for scenarios where you frequently execute the same queries that result in complex result sets.
+
+RDBMS
+
+    ACID > 
+
+                    Atomicity: Atomicity ensures that a transaction (a group of operations) is either all success or all rolled back.
+
+                    Consistency: Consistency ensures that a transaction brings the database from one valid state to another, following all rules and constraints.
+
+                    Isolation: Isolation ensures that transactions don’t interfere with each other. Each transaction happens independently.
+
+                    Durability: Durability ensures that once a transaction is complete, its changes are permanent, even if the system crashes.
+
+    Isolation Levels > 
+
+                    Read Uncommitted: This is the lowest level of isolation. In this level, one transaction may see uncommitted changes made by other transactions, leading to phenomena like "dirty reads". This level has the least amount of data protection but allows for the highest level of concurrency.
+
+                    Read Committed:  In this isolation level, a transaction can only see changes that have been committed before it began. This prevents dirty reads but can still allow non-repeatable reads, where a transaction reads the same row twice and gets a different value each time because another transaction has updated the row in the meantime.
+
+                    Repeatable Read:  This level ensures that if a transaction reads a row, it will read the same value in subsequent reads, regardless of changes made by other transactions. This prevents non-repeatable reads but does not necessarily prevent "phantom reads", where new rows added to the database by another transaction appear in the results of a query.
+
+                    Serializable: This is the highest level of isolation. It ensures complete isolation from other transactions, making the transaction appear as if it is the only one interacting with the database. This level prevents dirty reads, non-repeatable reads, and phantom reads, but it can significantly reduce concurrency and increase the likelihood of transaction conflicts.
+
+
+    Normalization >
+
+                    Normalization is the process of organizing data in a database. It includes creating tables and establishing relationships between those tables according to rules designed both to protect the data and to make the database more flexible by eliminating redundancy and inconsistent dependency.
+
+                    1NF: Don't use multiple fields in a single table to store similar data. For example, to track an inventory item that may come from two possible sources, an inventory record may contain fields for Vendor Code 1 and Vendor Code 2.
+
+                    What happens when you add a third vendor? Adding a field isn't the answer; it requires program and table modifications and doesn't smoothly accommodate a dynamic number of vendors. Instead, place all vendor information in a separate table called Vendors, then link inventory to vendors with an item number key, or vendors to inventory with a vendor code key.
+
+
+                    2NF: Records shouldn't depend on anything other than a table's primary key (a compound key, if necessary). For example, consider a customer's address in an accounting system. The address is needed by the Customers table, but also by the Orders, Shipping, Invoices, Accounts Receivable, and Collections tables. Instead of storing the customer's address as a separate entry in each of these tables, store it in one place, either in the Customers table or in a separate Addresses table.
+
+                    3NF: Values in a record that aren't part of that record's key don't belong in the table. In general, anytime the contents of a group of fields may apply to more than a single record in the table, consider placing those fields in a separate table.
+
+                    For example, in an Employee Recruitment table, a candidate's university name and address may be included. But you need a complete list of universities for group mailings. If university information is stored in the Candidates table, there is no way to list universities with no current candidates. Create a separate Universities table and link it to the Candidates table with a university code key.
+
+                    EXCEPTION: Adhering to the third normal form, while theoretically desirable, isn't always practical. If you have a Customers table and you want to eliminate all possible interfield dependencies, you must create separate tables for cities, ZIP codes, sales representatives, customer classes, and any other factor that may be duplicated in multiple records. In theory, normalization is worth pursuing. However, many small tables may degrade performance or exceed open file and memory capacities.
+
+                    It may be more feasible to apply third normal form only to data that changes frequently. If some dependent fields remain, design your application to require the user to verify all related fields when any one is changed.
+
+                    Boyce-Codd Normal Form (BCNF): It should be in 3NF, and for any dependency A → B, A should be a super key.
+
+                    - A student can be enrolled in only one course.
+                    - Each course is taught by exactly one instructor.
+                        
+                        table: student_id, course_id, instructor (violates BCNF)
+
+                    It should be designed like below
+
+                        table: student_id, course_id
+                        table: course_id, instructor
+
+
+
+    Joins > 
+
+                Database joins are operations in SQL (Structured Query Language) that allow you to combine data from two or more tables based on a related column between them
+
+                Inner Join: An inner join returns rows that have matching values in both tables.
+
+                    SELECT employees.name, departments.department_name 
+                    FROM employees
+                    INNER JOIN departments
+                    ON employees.department_id = departments.department_id;
+
+                This query retrieves employees who are associated with a department.
+
+                Left Join (Left Outer Join): A left join returns all rows from the left table (employees), and the matched rows from the right table (departments). If no match is found, NULL values are returned for columns from the right table.
+
+                    SELECT employees.name, departments.department_name
+                    FROM employees
+                    LEFT JOIN departments
+                    ON employees.department_id = departments.department_id;
+
+                This query retrieves all employees, including those who are not associated with any department.
+
+                Right Join (Right Outer Join): A right join returns all rows from the right table (departments), and the matched rows from the left table (employees). If no match is found, NULL values are returned for columns from the left table.
+
+                    SELECT employees.name, departments.department_name
+                    FROM employees
+                    RIGHT JOIN departments
+                    ON employees.department_id = departments.department_id;
+
+                This query retrieves all departments, including those that have no employees.
+
+
+
+    Indexing >
+
+                Indexing in a relational database management system (RDBMS) is a technique used to improve the speed and efficiency of data retrieval operations. An index creates a data structure that allows the database engine to find and access specific rows in a table more quickly. Without indexes, the database must perform a full table scan, examining each row to find the desired data, which can be slow and inefficient, especially for large tables.
+
+                - B-Tree Index: B-tree (Balanced Tree) is a self-balancing tree structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.
+                
+                - Hash Index: Hash indexes are optimized for exact match queries. Not suitable for range queries/ORDER BY / GROUP BY. Hash collisions can impact performance.
+                
+                - Full-text Index: For efficiently searching textual data.
+                
+                - Spatial Index: For indexing geometric data types (e.g., points, lines, polygons) for spatial queries.
+
+    Clustered Index >
+
+                A clustered index determines the physical order of data in a table. When a table has a clustered index, the table data is stored in the same order as the index. Because of this, each table can have only one clustered index. For column that is unique and not frequently modified, such as a primary key. This ensures efficient range queries and ordered retrievals.
+
+                Physical Order: Data rows are stored in order based on the clustered index key.
+                
+                Single Per Table: A table can have only one clustered index because the data rows themselves can be sorted in only one order.
+
+                Primary key is clustered index.
+
+    Non Clustered Index >
+
+                A non-clustered index creates a separate structure from the data rows. This structure contains pointers to the physical data rows, allowing multiple non-clustered indexes per table. Use for columns that are frequently searched, filtered, or used in joins. These can be non-unique and frequently modified, but having too many non-clustered indexes can degrade performance for DML operations.
+
+                Logical Order: Maintains a logical order of data that is separate from the physical order of rows.
+                
+                Multiple Indexes: A table can have multiple non-clustered indexes.
+
+    Index Fragmentation >  
+
+                This occurs when the logical order of the index does not match the physical order of the data on disk. It can happen due to various reasons such as frequent inserts, updates, and deletes on the indexed table. To mitigate we must do periodic maintenance tasks such as index rebuilds or reorganizations. Index rebuilds recreate the entire index, removing fragmentation in the process. Index reorganization defragments the index without rebuilding it entirely, usually by compacting index pages.
+
+    Row Chaining >
+
+                Row chaining occurs in a Database Management System (DBMS) when a row is too large to fit into a single database block. This situation usually arises when the row's size exceeds the block size set by the database system. As a result, the row's data is stored across multiple blocks, which can lead to performance issues because multiple I/O operations are needed to retrieve a single row. This fragmentation can slow down data access and degrade overall system performance.
+
+                Variable-Length Data Types: Columns with data types such as VARCHAR, CLOB, and BLOB can grow unpredictably, potentially leading to row chaining.
+
+                InnoDB uses a format called Dynamic or Compressed row format, which stores variable-length data types (e.g., VARCHAR, TEXT, BLOB) efficiently. Large values for these types can be stored outside of the main page (the database block) in overflow pages, while the main page stores a pointer to the overflow page.
+
+    Views > 
+
+                A database view is a virtual table that provides a way to look at data from one or more tables through a specific perspective. 
+
+                A view doesn't store data physically. Instead, it dynamically retrieves data from the underlying tables whenever the view is accessed.
+
+                Some views are read-only, meaning you can only select data from them. Others can be updatable, allowing insert, update, and delete operations if they meet certain criteria(https://dev.mysql.com/doc/refman/8.0/en/view-updatability.html). 
+
+
+    Partitioning > 
+
+                Database table partitioning is a technique used to divide large tables into smaller, more manageable pieces called partitions. Each partition holds a subset of the table's data and can be stored separately from other partitions. Partitioning helps improve query performance, manageability, and scalability by allowing the database to access and manipulate smaller subsets of data more efficiently.
+
+                - Range Partitioning: Divides the table into partitions based on ranges of values of the partition key. For example, you can partition a sales table by month, with each partition containing data for a specific month.
+
+                - List Partitioning: Divides the table into partitions based on lists of discrete values of the partition key. For example, you can partition a customer table by region, with each partition containing data for customers in a specific region.
+
+                - Hash Partitioning: Divides the table into partitions based on the result of a hash function applied to the partition key. This evenly distributes data across partitions based on the hash value of the partition key.
+
+                - Composite Partitioning: Combines multiple partitioning strategies to create a hierarchical partitioning scheme. For example, you can use range partitioning at one level and hash partitioning at another level to create a composite partitioning scheme.
+
+    Locking >
+
+                Database locking mechanisms are fundamental to ensure data consistency and integrity in multi-user or concurrent database environments. These mechanisms prevent concurrent transactions from interfering with each other, thus maintaining data integrity. 
+
+                - Row-Level Locks: Locks individual rows or records within a table, allowing fine-grained control over concurrency.
+
+                - Table-Level Locks: Locks an entire table, preventing any other transactions from accessing or modifying the table while the lock is held.
+
+
+    Optimistic Locking >
+
+                Optimistic locking is a concurrency control mechanism that assumes conflicts between transactions are rare and unlikely to occur. It does not acquire locks on database records upfront.
+
+                By default, Hibernate uses optimistic locking if the @Version annotation is present on an entity's version field. It automatically increments the version number when an entity is updated and throws an OptimisticLockingException if a concurrent modification is detected during the update.
+
+
+    Pessimistic Locking >
+
+                Pessimistic locking is a concurrency control mechanism that assumes conflicts between transactions are common and likely to occur. It acquires locks on database records upfront to prevent other transactions from accessing or modifying them concurrently.
+
+                Hibernate does not apply any default pessimistic locking behavior. You need to explicitly specify the locking mode using the @Lock annotation on repository methods to acquire pessimistic locks.
+
+                @Lock(LockModeType.PESSIMISTIC_WRITE)
+                Product findById(Long id);
+
+
+    N + 1 Query Problem >
+
+                The N+1 query problem happens when the data access framework executes N additional SQL statements to fetch the same data that could have been retrieved when executing the primary SQL query.
+
+                - We have 4 post rows and 4 post_comment child records. 
+                If we select the post_comments first and  later, we decide to fetch the associated post title for each post_comment, you are going to trigger the N+1 query issue because, instead of one SQL query, you executed 5 (1(to fetch post_comment) + 4(to fetch post title of each post_comment)):
+
+
+    Database Backup >
+
+                - Full backup: Copies all data to another location, regardless of existing backups or changes.
+                
+                - Differential backup: Copies data files that have changed since the last full backup.
+                
+                - Incremental backup: Copies data files that have changed since the last full or incremental backup.
+
+NOSQL/DISTRIBUTED
+
+    sharding > 
+
+                Database sharding is the process of storing a large database across multiple machines. A single machine, or database server, can store and process only a limited amount of data. Database sharding overcomes this limitation by splitting data into smaller chunks, called shards, and storing them across several database servers.
+
+    replication >
+
+                Replication is the process of creating and maintaining copies of data across multiple nodes or servers in a distributed system.
+
+                There are different replication models and strategies, each with its own trade-offs and considerations:
+
+                Master-Slave Replication: In this model, one node (the master) accepts write operations, while the other nodes (slaves) replicate data from the master for read operations. This model provides fault tolerance and scalability but may introduce replication lag and a single point of failure (the master).
+
+                Multi-Master Replication: In this model, multiple nodes can accept write operations independently, and changes are replicated bidirectionally between nodes. This model improves fault tolerance and scalability but introduces complexity in conflict resolution and consistency management.
+
+                Leader-Follower Replication: This model, commonly used in distributed databases like Apache Cassandra, involves electing a leader node (coordinator) that handles write operations and coordinates replication to follower nodes. Follower nodes can serve read operations, and data consistency is ensured through eventual consistency mechanisms.
+
+    Two Phase commit >
+
+                The Two-Phase Commit (2PC) protocol is a distributed algorithm used to achieve atomicity (all or nothing) in distributed transactions across multiple nodes or databases. It ensures that either all participating nodes commit the transaction, or none of them commit, to maintain data consistency and integrity.
+
+                - Prepare Phase:
+
+                    The transaction coordinator (often called the "coordinator" or "initiator") sends a "prepare" request to all participating nodes, asking them if they are ready to commit the transaction.
+                    Each participating node (also known as a "participant" or "resource manager") responds with either a "vote to commit" or a "vote to abort" based on whether it can successfully commit the transaction.
+                    If any participant votes to abort (indicating it cannot commit the transaction), the coordinator aborts the transaction and notifies all participants to rollback.
+
+                - Commit Phase (or "Decision Phase"):
+
+                    If all participants vote to commit the transaction during the prepare phase, the coordinator sends a "commit" request to all participants.
+                    Upon receiving the commit request, each participant commits the transaction and acknowledges the coordinator.
+                    If any participant fails to commit or acknowledge the commit request, the coordinator assumes a failure and initiates a rollback process.
+
+
+    Raft Algorithm >
+
+                The Raft algorithm is a distributed consensus algorithm designed to ensure fault-tolerant replication of state across a cluster of nodes in a distributed system.
+
+                The primary goal of the Raft algorithm is to maintain consistency and availability in the presence of node failures. It achieves this by electing a leader among the nodes and ensuring that all state changes are replicated and committed in a consistent order across the cluster.
+
+                The Raft consensus algorithm, includes a leader election mechanism as part of its protocol. Raft uses heartbeats and timeouts to detect leader failures and triggers a new leader election when necessary. Candidates request votes from other nodes, and the node with the most votes becomes the new leader.
+
+    Apache Zookeeper >
+
+                Apache ZooKeeper is a distributed coordination service for managing and synchronizing the configuration, naming, and distributed synchronization of distributed systems. It provides a centralized and highly reliable way for distributed applications to coordinate and maintain consistency across a cluster of nodes.   
+
+                It uses a variant of the Paxos algorithm to achieve consensus and elect a leader among a group of nodes. Zookeeper ensures that only one leader is elected at any given time and provides mechanisms for handling leader failure and recovery.
+
+    Saga Pattern >
+
+                You have applied the Database per Service pattern. Each service has its own database. Some business transactions, however, span multiple service so you need a mechanism to implement transactions that span services. For example, let’s imagine that you are building an e-commerce store where customers have a credit limit. The application must ensure that a new order will not exceed the customer’s credit limit. Since Orders and Customers are in different databases owned by different services the application cannot simply use a local ACID transaction.
+
+                The Saga pattern typically involves the following components:
+
+                - Transaction Management: Each service or component involved in the Saga manages its own local transaction using the appropriate transaction management mechanism (e.g., database transactions, message queues, etc.).
+
+                - Saga Orchestrator: The Saga Orchestrator is responsible for coordinating the sequence of transactions within the Saga. It initiates the Saga, monitors its progress, and handles any failures or compensating actions.
+
+                - Compensation Logic: Compensating transactions are designed to undo the effects of previously executed transactions within the Saga. They are invoked if a transaction fails or if the Saga needs to be rolled back due to an error.
+
+
+ASYNC PROGRAMMING
+
+    vert.x >
+
+                Vert.x is based on an event-driven architecture, where components communicate by sending and receiving events asynchronously. It provides a lightweight and efficient event bus for message passing between different parts of an application, both within a single JVM instance and across distributed nodes.
+
+    akka framework > 
+
+                Akka is based on the actor model, where actors are lightweight, isolated entities that communicate with each other asynchronously by exchanging messages. Actors encapsulate state and behavior, and they can process messages concurrently without the need for locks or manual synchronization.
+
+    project reactor >
+
+                Project Reactor is an open-source reactive programming library for building asynchronous, non-blocking applications in Java. It's primarily developed by Pivotal Software, which is also behind the Spring Framework.
+
+
+CAP THEOREM
+
+                The CAP theorem states that in a distributed data store, you can only achieve two out of the following three guarantees at the same time:
+
+                - Consistency (C): Every read receives the most recent write or an error.
+                - Availability (A): Every request (read or write) receives a response (not necessarily the most recent write).
+                - Partition Tolerance (P): The system continues to operate despite arbitrary partitioning due to network failures.
+
+                BigTable (Consistency): BigTable ensures strong consistency, meaning any read operation reflects the most recent write. This is crucial for applications requiring accurate and up-to-date data.. The trade-off is that in the presence of network issues, the system may not always be able to serve all requests, hence reducing availability. BigTable typically uses synchronous replication to ensure data consistency and integrity.
+
+                DynamoDB (Availability): DynamoDB is designed to be highly available, ensuring that the system can handle requests even if some parts are down. It replicates data across multiple nodes and data centers.
+
+
+                Cassandra (Availability): Cassandra is designed for high availability, ensuring data is available even if some nodes fail. It uses data replication across multiple nodes.
+
+                ScyllaDB is a high-performance NoSQL database compatible with Apache Cassandra. It aims to provide the same features as Cassandra but with significantly higher performance and lower latency.
+
+                Cassandra & ScyllaDB offer tunable consistency levels, allowing users to balance between consistency and availability based on their requirements.,
+                

@@ -1,0 +1,218 @@
+Interview Topics: 
+- DSA
+- Low level Design
+- High level Design
+- Theory - SOLID, Design Patterns, DBMS, Spring, Resume topics, Kafka
+
+Interview points to read:
+- Resume Preparation (IMP)
+- Core Java and Multithreading Questions (IMP)
+- Vert.x Interview Bit Questions (IMP)
+- Leetcode 150 Questions (IMP)
+- Your book reading - SOLID, Design Patterns, SQL (IMP)
+- Spring Boot Interview Bit Questions (If have time)
+- LLD Question Practice
+- HLD Question Practice
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Daily routine : 
+	- Concentrate more on LLD and HLD, Try to complete HLD videos ASAP
+	- daily one DSA question solving or revising
+	- Apply online or through referrals atleast few
+
+------------------------------------------------------------------------------------------------------------------------------
+Few Interview Questions :
+
+- Executor Service
+	- The Java ExecutorService is the interface that allows us to execute tasks on threads asynchronously. It is present in the java.util.concurrent package. The ExecutorService helps maintain a pool of threads and assigns them tasks. It also provides the facility to queue up tasks until there is a free thread available if the number of tasks is more than the threads available. (Note : Please consult Test Java Folder Repo for Examples)
+
+- Callable & Runnable Interfaces in Executor service
+	- A callable interface in Java programming stands as a powerful tool for managing concurrent tasks with precision. Unlike its counterpart, the Runnable interface, Callable allows tasks to return results or throw exceptions, opening doors to enhanced control and error handling in multithreaded environments.
+
+-  Runnable vs Thread Types of Implementation of Multithreading 
+	- When we extend Thread class, we can’t extend any other class even we require and When we implement Runnable, we can save a space for our class to extend any other class in future or now.
+	- When we extend Thread class, each of our thread creates unique object and associate with it. When we implements Runnable, it shares the same object to multiple threads.
+
+- What are the ways to avoid deadlock
+	- synchronised
+	- Locks
+	- volatile
+
+- Junit examples and Mockito
+
+- difference bwt put and patch and post
+	- PUT: Replace a user's profile data or create a resource with a known ID. (Idempotent Method)
+	- PATCH: Update specific fields like changing a user's email or password.
+	- POST: Create a new user, submit a contact form, or upload a file.
+
+- idempotent methods request methods
+	- idempotent methods are HTTP methods that produce the same result regardless of how many times they are executed
+	- GET, PUT, DELETE, HEAD and OPTIONS
+	- PUT and DELETE are idempotent because same update multiple times produces the same result
+	- GET, HEAD and OPTIONS are idempotent because they dont change the server state but just get the information
+	- Safe methods are idempotent but not all idempotent methods are safe.
+
+- how to initialise beans without component scan - explicit
+- Concurrent HashMap and hashmap working
+
+- Different Types Locks in multi threading 
+	- A lock in Java is a synchronization mechanism used to control access to a shared resource by multiple threads.
+		- Intrinsic Locks : These are the basic locks provided by Java, used with the synchronized keyword.
+			Every object in Java has an intrinsic lock, also known as a monitor. When a thread enters a synchronized block or method, it acquires the intrinsic lock of the object.
+		- Reentrant Locks (Explicit Locks) : A thread that acquires a reentrant lock can re-enter the lock without causing a 	deadlock, i.e., it can lock the resource multiple times. The lock must be released as many times as it was acquired.
+		- Read/Write Locks (ReadWriteLock) : ReadWriteLock is an interface that provides two types of locks - read lock and 	write lock. It allows multiple threads to read shared data simultaneously as long as no thread is writing to 		it.However, when a write lock is acquired, no other threads can read or write to the resource.
+		- StampedLock : A StampedLock is a more advanced version of a read-write lock introduced in Java 8. It allows three 	modes of locking: Write lock: Exclusive access to the resource. Read lock: Multiple threads can hold this lock 		concurrently, but only if no write lock is held. Optimistic read lock: This is a lock that allows a thread to 		attempt to read the resource optimistically (assuming no writes are happening), and if it turns out there was a 	write, it can retry.
+
+- what is the need of factory design pattern as it is just if-else condition - How it is more useful
+	- it enable looose coupling, object creation is safe in factory class making the client code clean, and also promotes single responsibility principle
+
+- Difference between Library, Toolkit, Framework, SDK and Engine
+	- Library : A library is a collection of pre-written code that developers can call upon to perform common tasks without rewriting the logic from scratch. The developer has full control over the flow of the application and decides when and how to use the library's functions. Ex : NumPy, jQuery
+	
+	- Toolkit : A toolkit is a set of tools and utilities designed to help with a particular type of task or development process. It can include libraries, utilities, and sometimes documentation or examples. Toolkits are often higher-level than libraries, providing a range of tools for a specific domain. ex : TensorFlow, Vert.x
+
+	- Framework : A framework is a more comprehensive structure that dictates how software should be built, including predefined architecture, control flow, and design conventions. Developers "fill in the blanks" within the framework's architecture to build their applications. Ex : Spring, Django
+		- The framework controls the flow of the application, meaning it "calls your code" rather than you calling the framework, a concept known as Inversion of Control (IoC). But there are many arguments that there are many framworks which dont use IoC.
+
+	- SDK : An SDK is a comprehensive package that provides all the tools, libraries, documentation, and utilities necessary to develop software for a specific platform or service. SDKs are often used to integrate with specific platforms or services, such as a cloud provider, operating system, or hardware. This often includes compilers, debuggers, and simulators. Ex : Android SDK, AWS SDK
+
+	- Engine : An engine is a highly specialized software system designed to handle complex processes for specific applications, such as rendering graphics, managing physics, or running simulations. Engines are optimized for performance and provide highly specialized capabilities, such as rendering 3D graphics or simulating physics. Ex : Game Development and Graphics Development.
+
+
+- Aggregation -> Composition and Inheritance
+	Inheritance is-a relationship and composition Has-a relationship. But in Aggregation is a relationship where one class contains a reference to another class, but both can exist independently. It represents a "has-a" relationship without strong ownership.
+
+- Yield, Join and Fork
+- Dirty Read - concept of reading uncommited data.
+
+- conflict/View Serializable
+	- A schedule (sequence of read/write operations) is conflict serializable if it can be transformed into a serial schedule (one where transactions run one after another with no overlap) by swapping non-conflicting operations.
+	- A schedule is view serializable if it’s equivalent to a serial schedule in terms of what data each transaction reads and writes, even if you can't swap operations to get there like in conflict serializability.
+
+	example : T1:  R(A)       W(A)
+			  T2:       R(A)       W(A)
+
+	For conflict, T1 is executed after T2 and for view reads are executed first and then writes, which means the first read in both schedules gets the same value and if T2 reads a value written by T1, the same must happen in the other schedule.
+
+- Event Driven
+- Aspect Oriented Programming in Spring
+
+- How is kakfa do Disk IO efficiently?
+	- We know that Kafka Topic is divided into partitions and partitions are further divided into segments. The main reason for dividing into segments is that to save that segments at same place on the disk and to optimise the data locality. Also, Kafka loads the next readable segment into the network buffer before the next network call from the consumer. As this is Batch Processing, segment mechanism helps alot in this.
+
+- Maximum number of consumer groups for a particular partition
+	- Only one consumer from one consumer group is read from one partition. For suppose, if more than one consumers are read from same partition then some consumer go idle and also when consumers are less, more load would be on one consumer. But multiple consumer from different consumer groups can read from same partition because every consumer groups have different job to do.
+
+- If one consumer fails then how it knows from where to read
+	- Offset Management :  it determines where to resume consuming messages using offsets, which are maintained for each partition it is assigned to. It is like a list that tracks till where it is completed its reading. Offset represents position, committed offset represents the last processed message by the consumer.
+
+- what version of jdk you have used 
+	- We use Eclipse temurin 17.0.13_11 version as it offically Open source project of Eclipse. We also use alphine file system of linux, because it is very light weight but in future if there are Libraries that is not supported by alphine then we need to upgrade the file system to unbuntu or others.
+
+- Image of jdk distribution
+	- We use Alphine distribution and Eclipse Temurin as Image of java.
+	- A Java distribution is a specific implementation of the Java Development Kit (JDK) or Java Runtime Environment (JRE) provided by a vendor. It includes the Java binaries, libraries, tools, and configurations needed to run Java applications. Ex : OpenJDK, Amazon Corretto
+	- A Docker image is a lightweight, standalone, and executable package that includes everything needed to run a piece of software. For a Java-based image, this would include the base operating system (e.g., Alpine Linux) and a specific Java distribution (e.g., Eclipse Temurin). Ex: eclipse-temurin:17-alpine, openjdk:17-slim
+	
+- OOPS Pillars with examples
+
+- Making a class Immutable
+	- Make the class final
+	- Make all fields private and final
+	- Provide a constructor for initialization
+	- Avoid providing "setter" methods
+	- Ensure no references to mutable fields are exposed
+
+- Docker/Jib
+- Kubernetes
+- Multithreading (How will you handle deadlock condition)
+- Permgen/Metaspace
+- Stream API
+
+- Functional Interface - A functional interface in Java is an interface that contains only one abstract method. Functional interfaces can have multiple default or static methods, but only one abstract method. Runnable, ActionListener, and Comparator are common examples of Java functional interfaces.
+
+- Lambda Expression(check Test Folder)
+- How functional interface are used in lambda expression : using Behavior Parameteriazation (check Test Folder)
+
+- Java 1.8
+- SQL Query to find the name of 5 users with highest number of followers
+- Transaction
+- Commit/Rollback
+- Actuator
+- Auto Scaling
+- Scenario where you have handled exception
+- Optional Class
+- Isolation strategies
+- Indexes
+- You are given a list of strings need to filter all the strings which starts with character 'A'
+- Why databases
+- Trie Data Structure
+
+- SkipList in Java
+	- SkipList are type of balanced Search Trees (like AVL and Red-Black Trees), and these kind of data structures offer even more simplistic structure. Best Part is Search, Insertion and Deletion are done in Log(n) time complexity. Java Libraries that implement Skip List are ConcurrentSkipListMap<K, V> and ConcurrentSkipListSet<E>. Basically, It combines the Linked List's Insertion and Deletion and Binary search of Array. This is basically a sorted Linked list.
+	- Here, it is basically structure like :
+			2-----6-----10
+			2 3 4 6 7 8 10
+	- So, While searching for a element we first search for above layer and bottom layer where all the elements are present. Example, if we want to search 8, we will search the element in the above layer whose next element is greater than the target. In this case, it is 6. And then we go to bottom layer. There can be many layers, in this structure and we can decide layer of a element using coin flip algorithm.	
+
+- if there are the 8 partitions and there are two consumer groups with 8 consumers. whats your comment?
+	- First thing, consumer should not be more than the number of partitions because each partition is read by only one consumer. if there are multiple consumers, many consumers become idle, and it is inefficient.
+	- In this configuration of 8 partitions and 2 consumer groups with 8 consumers each, the assignment is perfectly balanced. Each consumer in both groups gets its own partition, ensuring efficient parallel processing and no consumer idling. Both consumer groups will process the same data but for independent purposes, which is common in scenarios where different applications or services need to consume the same Kafka topics.
+
+
+- what are the read and write consistency parameter in scylla DB?
+	- ONE, QUORUM, LOCAL_QUORUM, ALL, ANY, TWO, THREE.
+	- QUORUM means around 60% of nodes should response(read)/update(write).
+	- LOCAL_QUORUM means same as QUORUM in local datacenter
+	- For a distributed system to ensure consistency with a high probability, the following formula is applied:
+		𝑊 + 𝑅 > 𝑁
+		Where:
+			W is the number of replicas needed to acknowledge a write.
+			R is the number of replicas needed to acknowledge a read.
+			N is the replication factor.
+	- This is configured at the query level or code level.
+		private static final SimpleStatement SIMPLE_STATEMENT_FOR_MULTIPLE_LINE_ITEM_IDS = SimpleStatement.builder(String
+			.format("SELECT %s FROM fc_click_tracker_d WHERE device_id = :device_id AND line_item_id in :line_item_ids",
+					SELECT_FIELDS))
+			.setConsistencyLevel(DefaultConsistencyLevel.LOCAL_QUORUM).build();
+		(FREQUENCY_CAPPING)
+	- Replication strategy
+		- Simple : One datacentre, replication factor gives in how many nodes data should be replicated.
+		- Network Topology : Multiple Datacentres, replication factor gives in how many nodes data should be replicated in the specific data centre.
+
+
+- How you will ensure Sync in NoSql Db like scylla, if one node goes down?
+	- Replication Factor & Consistency Levels is one of the method. There are other methods like Hinted Handoff, Read Repair, WAL etc.
+
+- which version of JDK you are using and which JVM you are running?
+	- We are using Eclipse Temurin JDK version 17.0.8.1, basically this is docker image which can be used in microservices. This is known for minimal footprints and fast startup times.
+	- JDK 17 is the long-term support (LTS) version of Java, meaning it will receive extended support and updates, making it a popular choice for production environments.
+	- Since this is a JDK, it contains JRE and JVM : JVM will be an OpenJDK HotSpot JVM, which is the default JVM implementation used in OpenJDK.
+	- Eclipse Temurin is a highly trusted and widely used distribution of OpenJDK. It provides fully tested, production-ready binaries for the Java platform, and the JDK version used here is stable and secure.
+
+- Kafka Question :
+	- Kraft and raft theorem
+	- Data Plane and control Plane 
+	- what are the configurations provided by kafka stream to handle the duplicates exactly once semantic
+
+- Multithreading: 
+	- Signal and await
+	- volatile
+
+- Web and Application Server 
+	Web Server is used to serve the static content like html, css, images, etc. While Application server used to serve the business logic connecting to different resources like DB, etc. Examples of Web server are Nginx, Apache HTTP Server and examples of Application Server Apache Tomcat(java/JSP), Glassfish, Node Js(acts as both). Nginx (web server) serves static files and forwards dynamic requests to Tomcat (app server).
+
+- Spring bean Lifecycle
+
+- Ways to solve Merge Conflicts
+
+- Weak Reference and Soft Reference
+
+
+
+
+
+
+
+

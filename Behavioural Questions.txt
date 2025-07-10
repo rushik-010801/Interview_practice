@@ -1,0 +1,54 @@
+Behavioural Questions :
+
+Company's Core : 
+
+- Why do you want to join Lloyds Banking group?
+	- As we know, Lloyds Banking group has 300 years of history which makes organisation of solid foundation of great values.
+	- As per my research, Bank server around 30 million customers across the UK, and around 22 million are digitally active which is a challenging taks to build scalable products.
+	- Company's interests on getting new technological advancements in market like server less architecture, agents AI is great and gives a lot of opportunities for developers.
+	- Also, I heard about company's culture, its core values, its care about the employees and perks which makes anyone to be a part of.
+	- Also, after the discussion with my hiring manager, and knowing about the business problems they are solving, the tech stack they are using and challenges they are offering interests me alot, and I feel this next step of me will create a great impact in my career.
+
+- What are the Lloyds core values?
+	- People First
+	- Bold
+	- Inclusive
+	- Sustainable
+	- Trust
+
+
+General Behavioural : 
+
+- What are the challenges or any difficult situations you faced while contributing to videoads microservice and ZAS?
+	- Here you can talk about the Challenges you have faced when zas-frequency-capping service fallback service.
+
+- What if you get a good offer after you get this offer? would you join?
+	//Need to check if really they ask this question. But if they ask this on location based, then answer would be : //
+	- I’ve noticed that opportunities for someone with moderate experience like mine are quite limited in Hyderabad. Even when opportunities do arise, they often come with issues like inadequate learning opportunities, lower pay, or unclear roles, forcing me to compromise. But in Bangalore, I won't find that kind of problems. Additionally, once I join an organization, I prefer not to leave early because that could negatively affect my career, so I would be very careful in my decision.
+
+- Are you fine with Banglore location? And what if I gave you offer in Hyderabad, would you go there?
+	- I have applied for the Bangalore location, which is ideal since I've been settled here for three years and the Warner Bros. office is right next to my current one, so commuting isn’t an issue. As for commuting to other locations, if most of the team is present there, I would prefer to work onsite because interacting with them enhances team bounding and helps me work more efficiently and faster.
+
+- Where do you see yourself in next 5 years?
+	- I want to become more knowledgeable and secure a better position in my career. I'm eager to improve my skills by working with different technologies and taking on new challenges. I believe that learning and adapting continuously will not only help me grow professionally but also enable me to contribute more effectively to my team.
+
+- Why do we hire you?
+	- First, I come from the entertainment industry and here things go little fast. So, Fast-paced environment like this in early of anyone's careers teaches him about things go at corporate level. This help me being more productive and effective for my upcoming organization. Secondly, I can say that my current teamwork and communication skills enable me to work collaboratively. Thirdly, I have good experience on the Tech stack and responsibilities that roles requires and I am confident that I could contribute well. 
+
+- Why do you want to shift?
+	- Actually, I am grateful to my present organisation, It has taught me a lot - Technical and non-technical. But I feel every person need to change their track a little for getting a different exposure. But when we have to change is the question? For me, the right time to make a change is when my learning graph begins to stable. And I want to grow both professionally and financially, I definitely feel that this organisation would help achieve that growth.
+
+- What are your strengths and weaknesses?
+	Strengths - I can say that I am a quick learner because when I have freshly join my current organisation, I was new to few of the technologies like frameworks like vert.x, spring, asynchronous coding other tools like corologix. I have showed a great interest on that, grasped them as much as possible before working on that.
+	- Adaptable to changes - At the time of ZAS Project we have different parts of project like adserving, management and reporting. At first I was in management module, just when I have completed my work their, I was offered to work on few modules of adserving part of ZAS project, and I tried to adapt from that part to this one in few days.
+	Weakness - I noticed that sometimes my learning or development phase extends little bit, but till now I have ensured that my deadlines are never crossed and always tried to provide the solution as soon as possible.
+	- Sometimes I will difficult to prioritise few tasks given from my seniors, but yes, I am working on that through asking about the deadlines, and providing them good estimates.
+
+
+- Can you share an example of a time when you had to deal with a difficult team member or conflict?
+
+
+
+
+
+Note : Practice with STAR Method S - situation, T - task, A - Action, R - Result
